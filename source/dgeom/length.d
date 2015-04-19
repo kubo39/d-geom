@@ -48,6 +48,7 @@ class Length(T) if ( __traits(isArithmetic, T) )
 
   override bool opEquals(Object other)
   {
+    scope(failure) return false;
     return opEquals(other.to!(typeof(this)));
   }
 
@@ -85,5 +86,5 @@ unittest
 
   auto one_foot_in_mm = one_foot * mm_per_inch;
   assert(one_foot_in_mm == new Length!float(304.8));
-  assertThrown(one_foot_in_mm == new ScaleFactor!float(304.8));
+  assert(!(one_foot_in_mm == new ScaleFactor!float(304.8)));
 }
