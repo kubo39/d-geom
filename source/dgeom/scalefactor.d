@@ -28,7 +28,7 @@ class ScaleFactor(T) if ( __traits(isArithmetic, T) )
     else static assert(false);
   }
 
-  alias opEquals = object.opEquals;
+  alias opEquals = Object.opEquals;
 }
 
 
