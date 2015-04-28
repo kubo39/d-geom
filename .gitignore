@@ -1,4 +1,5 @@
 *~
 *.o
 build/
-dub.selection.json
+.dub/
+dub.selections.json
