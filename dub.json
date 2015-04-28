@@ -1,0 +1,7 @@
+{
+    "name": "d-geom",
+    "description": "Geometry primitives for D.",
+    "authors": ["kubo39"],
+    "targetType": "library",
+    "targetPath": "build",
+}
