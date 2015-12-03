@@ -3,7 +3,7 @@ module dgeom.approxeq;
 import std.math : abs, E;
 
 
-template approx(T) 
+template approx(T)
 {
   static  if ( __traits(isFloating, T) ) {
     T approx_epsilon() @property

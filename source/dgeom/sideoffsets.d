@@ -41,7 +41,6 @@ class SideOffsets2D(T) if ( __traits(isArithmetic, T) )
   {
     return top == 0 && right == 0 && left == 0 && bottom == 0;
   }
-  
 }
 
 
@@ -49,7 +48,7 @@ unittest
 {
   auto zero = new SideOffsets2D!int(0, 0, 0, 0);
   auto one = new SideOffsets2D!int(1, 1, 1, 1);
-  
+
   assert(zero.empty);
   assert(!one.empty);
 

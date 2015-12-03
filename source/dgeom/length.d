@@ -38,7 +38,7 @@ class Length(T) if ( __traits(isArithmetic, T) )
   {
     return get - other.get;
   }
-  
+
   alias opCmp = Object.opCmp;
 
   bool opEquals(typeof(this) other)
