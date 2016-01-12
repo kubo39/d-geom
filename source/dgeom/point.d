@@ -4,7 +4,7 @@ import dgeom.scalefactor;
 import dgeom.size;
 
 
-class Point(T)
+class Point2D(T)
 {
   T x;
   T y;
@@ -15,23 +15,23 @@ class Point(T)
     y = _y;
   }
 
-  typeof(this) opBinary(string op)(Point!T other)
+  typeof(this) opBinary(string op)(Point2D!T other)
   {
-    static if (op == "+") return new Point(x + other.x, y + other.y);
-    else static if (op == "-") return new Point(x - other.x, y - other.y);
+    static if (op == "+") return new Point2D(x + other.x, y + other.y);
+    else static if (op == "-") return new Point2D(x - other.x, y - other.y);
     else static assert(false);
   }
 
   typeof(this) opBinary(string op)(Size2D!T other)
   {
-    static if (op == "+") return new Point(x + other.width, y + other.height);
+    static if (op == "+") return new Point2D(x + other.width, y + other.height);
     else static assert(false);
   }
 
   typeof(this) opBinary(string op)(ScaleFactor!T scale)
   {
-    static if (op == "*") return new Point(x * scale, y * scale);
-    else static if (op == "/") return new Point(x / scale, y / scale);
+    static if (op == "*") return new Point2D(x * scale, y * scale);
+    else static if (op == "/") return new Point2D(x / scale, y / scale);
     else static assert(false);
   }
 }
