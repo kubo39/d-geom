@@ -22,7 +22,7 @@ class Rectangle(T)
       size);
   }
 
-  bool contaions(Point2D!T other)
+  bool contains(Point2D!T other)
   {
     return origin.x <= other.x && other.x < origin.x + size.width &&
       origin.y <= other.y && other.y < origin.y + size.height;
@@ -61,6 +61,6 @@ unittest
 unittest
 {
   auto r = new Rectangle!int(new Point2D!int(-20, 15), new Size2D!int(100, 200));
-  assert(r.contaions(new Point2D!int(0, 50)));
-  assert(r.contaions(new Point2D!int(-10, 200)));
+  assert(r.contains(new Point2D!int(0, 50)));
+  assert(r.contains(new Point2D!int(-10, 200)));
 }
