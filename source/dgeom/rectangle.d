@@ -61,6 +61,30 @@ unittest
 unittest
 {
   auto r = new Rectangle!int(new Point2D!int(-20, 15), new Size2D!int(100, 200));
+
   assert(r.contains(new Point2D!int(0, 50)));
   assert(r.contains(new Point2D!int(-10, 200)));
+
+  // The `contains` method is inclusive of the top/left edges, but not the
+  // bottom/right edges.
+  assert(r.contains(new Point2D!int(-20, 15)));
+  assert(!r.contains(new Point2D!int(80, 15)));
+  assert(!r.contains(new Point2D!int(80, 215)));
+  assert(!r.contains(new Point2D!int(-20, 215)));
+
+  // Points beyond the top-left corner.
+  assert(!r.contains(new Point2D!int(-25, 15)));
+  assert(!r.contains(new Point2D!int(-15, 10)));
+
+  // Points beyond the top-right corner.
+  assert(!r.contains(new Point2D!int(85, 20)));
+  assert(!r.contains(new Point2D!int(75, 10)));
+
+  // Points beyond the bottom-right corner.
+  assert(!r.contains(new Point2D!int(85, 210)));
+  assert(!r.contains(new Point2D!int(75, 220)));
+
+  // Points beyond the bottom-left corner.
+  assert(!r.contains(new Point2D!int(-25, 210)));
+  assert(!r.contains(new Point2D!int(-15, 220)));
 }
