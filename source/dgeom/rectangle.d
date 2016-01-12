@@ -38,10 +38,10 @@ class Rectangle(T)
 unittest
 {
   auto r = Rectangle!uint.init;
-  assert(r.size.width == uint.init);
-  assert(r.size.height == uint.init);
-  assert(r.origin.x == uint.init);
-  assert(r.origin.y == uint.init);
+  assert(r.size.width == 0);
+  assert(r.size.height == 0);
+  assert(r.origin.x == 0);
+  assert(r.origin.y == 0);
 }
 
 

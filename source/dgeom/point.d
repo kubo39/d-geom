@@ -45,6 +45,6 @@ class Point2D(T)
 unittest
 {
   auto p = Point2D!uint.init;
-  assert(p.x == uint.init);
-  assert(p.y == uint.init);
+  assert(p.x == 0);
+  assert(p.y == 0);
 }

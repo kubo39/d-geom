@@ -36,6 +36,6 @@ class Size2D(T) if ( __traits(isArithmetic, T) )
 unittest
 {
   auto size2D = Size2D!uint.init;
-  assert(size2D.width == uint.init);
-  assert(size2D.height == uint.init);
+  assert(size2D.width == 0);
+  assert(size2D.height == 0);
 }
