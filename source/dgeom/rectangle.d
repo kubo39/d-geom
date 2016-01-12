@@ -21,6 +21,21 @@ class Rectangle(T)
       new Point2D!T(origin.x + other.x, origin.y + other.y),
       size);
   }
+
+  static init() @property
+  {
+    return new Rectangle!T(Point2D!T.init, Size2D!T.init);
+  }
+}
+
+
+unittest
+{
+  auto r = Rectangle!uint.init;
+  assert(r.size.width == uint.init);
+  assert(r.size.height == uint.init);
+  assert(r.origin.x == uint.init);
+  assert(r.origin.y == uint.init);
 }
 
 

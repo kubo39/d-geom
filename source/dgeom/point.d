@@ -34,4 +34,17 @@ class Point2D(T)
     else static if (op == "/") return new Point2D(x / scale, y / scale);
     else static assert(false);
   }
+
+  static init() @property
+  {
+    return new Point2D!T(T.init, T.init);
+  }
+}
+
+
+unittest
+{
+  auto p = Point2D!uint.init;
+  assert(p.x == uint.init);
+  assert(p.y == uint.init);
 }
