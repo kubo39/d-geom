@@ -26,4 +26,17 @@ class Size2D(T) if ( __traits(isArithmetic, T) )
     case "/": return new Size2D(width / scale, height / scale);
     }
   }
+
+  static init() @property
+  {
+    return new Size2D!T(T.init, T.init);
+  }
+}
+
+
+unittest
+{
+  auto size2D = Size2D!uint.init;
+  assert(size2D.width == 0);
+  assert(size2D.height == 0);
 }
