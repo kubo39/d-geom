@@ -1,7 +1,7 @@
 module dgeom.length;
 
 import dgeom.scalefactor;
-import std.conv;
+import std.conv : to;
 
 
 class Length(T) if ( __traits(isArithmetic, T) )
@@ -20,18 +20,20 @@ class Length(T) if ( __traits(isArithmetic, T) )
 
   typeof(this) opBinary(string op)(Length!T other)
   {
-    static if (op == "+") return new Length(get + other.get);
-    else static if (op == "-") return new Length(get - other.get);
-    else static if (op == "*") return new Length(get * other.get);
-    else static assert(false);
+    final switch (op) {
+    case "+": return new Length(get + other.get);
+    case "-": return new Length(get - other.get);
+    case "*": return new Length(get * other.get);
+    }
   }
 
   typeof(this) opBinary(string op)(ScaleFactor!T scale)
   {
-    static if (op == "+") return new Length(get + scale.get);
-    else static if (op == "-") return new Length(get - scale.get);
-    else static if (op == "*") return new Length(get * scale.get);
-    else static assert(false);
+    final switch (op) {
+    case "+": return new Length(get + scale.get);
+    case "-": return new Length(get - scale.get);
+    case "*": return new Length(get * scale.get);
+    }
   }
 
   float opCmp(typeof(this) other)

@@ -4,7 +4,7 @@ import dgeom.scalefactor;
 import dgeom.size;
 
 
-class Point(T)
+class Point(T) if ( __traits(isArithmetic, T) )
 {
   T x;
   T y;
@@ -17,9 +17,10 @@ class Point(T)
 
   typeof(this) opBinary(string op)(Point!T other)
   {
-    static if (op == "+") return new Point(x + other.x, y + other.y);
-    else static if (op == "-") return new Point(x - other.x, y - other.y);
-    else static assert(false);
+    final switch (op) {
+    case "+": return new Point(x + other.x, y + other.y);
+    case "-": return new Point(x - other.x, y - other.y);
+    }
   }
 
   typeof(this) opBinary(string op)(Size2D!T other)
@@ -30,8 +31,9 @@ class Point(T)
 
   typeof(this) opBinary(string op)(ScaleFactor!T scale)
   {
-    static if (op == "*") return new Point(x * scale, y * scale);
-    else static if (op == "/") return new Point(x / scale, y / scale);
-    else static assert(false);
+    final switch (op) {
+    case "*": return new Point(x * scale, y * scale);
+    case "/": new Point(x / scale, y / scale);
+    }
   }
 }

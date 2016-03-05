@@ -20,12 +20,13 @@ class ScaleFactor(T) if ( __traits(isArithmetic, T) )
     return new ScaleFactor(1 / get);
   }
 
-  typeof(this) opBinary(string op)(typeof(return) other)
+  typeof(this) opBinary(string op)(typeof(this) other)
   {
-    static if (op == "+") return new ScaleFactor(get + other.get);
-    else static if (op == "-") return new ScaleFactor(get - other.get);
-    else static if (op == "*") return new ScaleFactor(get * other.get);
-    else static assert(false);
+    final switch (op) {
+    case "+": return new ScaleFactor(get + other.get);
+    case "-": return new ScaleFactor(get - other.get);
+    case "*": return new ScaleFactor(get * other.get);
+    }
   }
 
   alias opEquals = Object.opEquals;

@@ -21,8 +21,9 @@ class Size2D(T) if ( __traits(isArithmetic, T) )
 
   typeof(this) opBinary(string op)(ScaleFactor!T scale)
   {
-    static if (op == "*") return new Size2D(width * scale, height * scale);
-    else static if (op == "/") return new Size2D(width / scale, height / scale);
-    else static assert(false);
+    final switch (op) {
+    case "*": return new Size2D(width * scale, height * scale);
+    case "/": return new Size2D(width / scale, height / scale);
+    }
   }
 }
