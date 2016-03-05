@@ -4,7 +4,7 @@ import dgeom.point;
 import dgeom.size;
 
 
-class Rectangle(T)
+class Rectangle(T) if ( __traits(isArithmetic, T) )
 {
   Point2D!T origin;
   Size2D!T size;
