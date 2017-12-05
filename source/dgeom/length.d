@@ -6,87 +6,99 @@ import std.conv : to;
 
 class Length(T) if ( __traits(isArithmetic, T) )
 {
-  T x;
+    T x;
 
-  this(T _x)
-  {
-    x = _x;
-  }
-
-  T get()
-  {
-    return x;
-  }
-
-  typeof(this) opBinary(string op)(Length!T other)
-  {
-    final switch (op) {
-    case "+": return new Length(get + other.get);
-    case "-": return new Length(get - other.get);
-    case "*": return new Length(get * other.get);
+    this(T _x)
+    {
+        x = _x;
     }
-  }
 
-  typeof(this) opBinary(string op)(ScaleFactor!T scale)
-  {
-    final switch (op) {
-    case "+": return new Length(get + scale.get);
-    case "-": return new Length(get - scale.get);
-    case "*": return new Length(get * scale.get);
+    T get()
+    {
+        return x;
     }
-  }
 
-  float opCmp(typeof(this) other)
-  {
-    return get - other.get;
-  }
+    typeof(this) opBinary(string op : "+")(Length!T other)
+    {
+        return new Length(get + other.get);
+    }
 
-  alias opCmp = Object.opCmp;
+    typeof(this) opBinary(string op : "-")(Length!T other)
+    {
+        return new Length(get - other.get);
+    }
 
-  bool opEquals(typeof(this) other)
-  {
-    return get == other.get;
-  }
+    typeof(this) opBinary(string op : "*")(Length!T other)
+    {
+        return new Length(get * other.get);
+    }
 
-  override bool opEquals(Object other)
-  {
-    scope(failure) return false;
-    return opEquals(other.to!(typeof(this)));
-  }
+    typeof(this) opBinary(string op : "+")(ScaleFactor!T scale)
+    {
+        return new Length(get + scale.get);
+    }
 
-  alias opEquals = Object.opEquals;
+    typeof(this) opBinary(string op : "-")(ScaleFactor!T scale)
+    {
+        return new Length(get - scale.get);
+    }
+
+    typeof(this) opBinary(string op : "*")(ScaleFactor!T scale)
+    {
+        return new Length(get * scale.get);
+    }
+
+    float opCmp(typeof(this) other)
+    {
+        return get - other.get;
+    }
+
+    alias opCmp = Object.opCmp;
+
+    bool opEquals(typeof(this) other)
+    {
+        return get == other.get;
+    }
+
+    override bool opEquals(Object other)
+    {
+        scope(failure) return false;
+        return opEquals(other.to!(typeof(this)));
+    }
+
+    alias opEquals = Object.opEquals;
 }
 
 
 unittest
 {
-  import std.stdio;
-  import std.exception;
+    import std.stdio;
+    import std.exception;
 
-  auto mm_per_inch = new ScaleFactor!float(25.4);
+    auto mm_per_inch = new ScaleFactor!float(25.4);
 
-  auto one_foot = new Length!float(12.0);
-  auto two_feet = one_foot + one_foot;
-  auto zero_feet = one_foot - one_foot;
+    auto one_foot = new Length!float(12.0);
+    auto two_feet = one_foot + one_foot;
+    auto zero_feet = one_foot - one_foot;
 
-  assert(one_foot.get == 12.0);
-  assert(two_feet.get == 24.0);
-  assert(zero_feet.get == 0.0);
+    assert(one_foot.get == 12.0);
+    assert(two_feet.get == 24.0);
+    assert(zero_feet.get == 0.0);
 
-  assert(one_foot == one_foot);
-  assert(two_feet != one_foot);
+    assert(one_foot == one_foot);
+    assert(two_feet != one_foot);
 
-  assert(zero_feet < one_foot);
-  assert(zero_feet <= one_foot);
-  assert(two_feet > one_foot);
-  assert(two_feet >= one_foot);
+    assert(zero_feet < one_foot);
+    assert(zero_feet <= one_foot);
+    assert(two_feet > one_foot);
+    assert(two_feet >= one_foot);
 
-  assert(two_feet <= two_feet);
-  assert(two_feet >= two_feet);
-  assert(!(two_feet > two_feet));
-  assert(!(two_feet < two_feet));
+    assert(two_feet <= two_feet);
+    assert(two_feet >= two_feet);
+    assert(!(two_feet > two_feet));
+    assert(!(two_feet < two_feet));
 
-  auto one_foot_in_mm = one_foot * mm_per_inch;
-  assert(one_foot_in_mm == new Length!float(304.8));
-  assert(!(one_foot_in_mm == new ScaleFactor!float(304.8)));
+    auto one_foot_in_mm = one_foot * mm_per_inch;
+    assert(one_foot_in_mm == new Length!float(304.8));
+    assert(!(one_foot_in_mm == new ScaleFactor!float(304.8)));
 }
